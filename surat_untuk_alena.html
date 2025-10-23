@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💌 Surat Digital untuk Alena 💌</title>
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffd6e0, #fff0f5);
+    color: #4a0072;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+  }
+  h1 {
+    font-size: 2em;
+    color: #c2185b;
+    margin-bottom: 20px;
+  }
+  #message {
+    font-size: 1.2em;
+    max-width: 500px;
+    line-height: 1.5;
+    min-height: 120px;
+  }
+  button {
+    background-color: #ff80ab;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button:hover {
+    background-color: #ec407a;
+    transform: scale(1.05);
+  }
+  .heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 4s linear infinite;
+    color: #ff5c8d;
+  }
+  @keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-600px) scale(1.5); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Surat Digital untuk Alena 💖</h1>
+<div id="message">Klik tombol di bawah untuk mulai membaca...</div>
+<button id="next">Buka Surat 💌</button>
+
+<script>
+const messages = [
+  "Hai... Alena 🌷",
+  "Ada sesuatu yang ingin aku sampaikan 💭",
+  "Awalnya aku pikir kamu cuma orang biasa...",
+  "Tapi ternyata, kamu luar biasa 💫",
+  "Setiap kali lihat senyummu, rasanya dunia berhenti sebentar 😊",
+  "Dan hatiku... pelan-pelan jatuh ke kamu 💖",
+  "Alena... mungkin aku bukan yang sempurna,",
+  "Tapi aku tulus suka sama kamu 💕",
+  "Terima kasih sudah membaca, Alena.\nSemoga senyum kamu hari ini lebih indah dari biasanya 💌"
+];
+
+let i = 0;
+const messageDiv = document.getElementById("message");
+const nextButton = document.getElementById("next");
+
+function typeWriter(text, i=0) {
+  if (i < text.length) {
+    messageDiv.innerHTML = text.substring(0, i+1).replace(/\n/g, "<br>");
+    setTimeout(() => typeWriter(text, i + 1), 50);
+  }
+}
+
+nextButton.addEventListener("click", () => {
+  if (i < messages.length) {
+    messageDiv.innerHTML = "";
+    typeWriter(messages[i]);
+    i++;
+    nextButton.textContent = (i === messages.length) ? "💫 Tutup Surat" : "➡️ Lanjut";
+  } else {
+    messageDiv.innerHTML = "💗 Dari seseorang yang gak bisa berhenti mikirin kamu 💗";
+    nextButton.style.display = "none";
+  }
+});
+
+// animasi hati melayang
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.bottom = "0px";
+  heart.innerHTML = "💖";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 4000);
+}
+setInterval(createHeart, 500);
+</script>
+
+</body>
+</html>
